@@ -1,11 +1,20 @@
 class ClickerApp {
   constructor() {
     this.score = 0;
+    // score multiplier for clicking on commit button
+    this.clickMuliplier = 1;
   }
 
-  increaseScore() {
-    this.score += 1;
+  increaseScoreFromClick() {
+    this.score += 1 * this.clickMuliplier;
     ui.displayScore(this.score);
+  }
+
+  increaseScoreFromInterval() {
+    setInterval(() => {
+      this.score += 1 * this.muliplier;
+      ui.displayScore(this.score);
+    }, 300);
   }
 }
 
@@ -32,7 +41,7 @@ class Controller {
   }
 
   static handleCommitClick() {
-    clickerApp.increaseScore();
+    clickerApp.increaseScoreFromClick();
   }
 }
 
