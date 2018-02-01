@@ -13,9 +13,14 @@ class ClickerApp {
     this.checkUnlockBuyableItems();
   }
 
+  subtractScore(scoreToSubtract) {
+    this.score -= scoreToSubtract;
+    ui.displayScore(this.score);
+  }
+
   checkUnlockBuyableItems() {
     if (this.score >= 10 && !this.sleepyCat) {
-      this.sleepyCat = new BuyableItem('Sleepy Cat', 200, 1, 2);
+      this.sleepyCat = new BuyableItem('Sleepy Cat', 50, 1, 2);
     }
   }
 }
@@ -70,7 +75,10 @@ class Controller {
   static handleSleepyCatBuy() {
     // placeholder for future multi-buy option
     const amount = 1;
-    if (clickerApp.sleepyCat) clickerApp.sleepyCat.increaseAmount(amount);
+    if (clickerApp.sleepyCat && clickerApp.sleepyCat.price <= clickerApp.score) {
+      clickerApp.subtractScore(clickerApp.sleepyCat.price);
+      clickerApp.sleepyCat.increaseAmount(amount);
+    }
   }
 }
 
@@ -97,7 +105,12 @@ class BuyableItem {
 
   increaseAmount(amount) {
     this.amount += amount;
+    this.updatePrice();
     UI.displayItemInfos(this.name, this.price, this.cps, this.amount);
+  }
+
+  updatePrice() {
+    this.price = Math.round(this.price * 1.05);
   }
 }
 
