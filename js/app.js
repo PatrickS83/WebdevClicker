@@ -1,12 +1,14 @@
 class ClickerApp {
   constructor() {
     this.score = 0;
+    // base increase of score
+    this.baseIncrease = 1;
     // score multiplier for clicking on commit button
     this.clickMuliplier = 1;
   }
 
   increaseScoreFromClick() {
-    this.score += 1 * this.clickMuliplier;
+    this.score += this.baseIncrease * this.clickMuliplier;
     ui.displayScore(this.score);
   }
 
@@ -33,7 +35,7 @@ class UI {
 
   displayClickFeedback() {
     const clickFeedback = document.createElement('span');
-    clickFeedback.innerHTML = 'git commit';
+    clickFeedback.innerHTML = `git commit +${clickerApp.baseIncrease * clickerApp.clickMuliplier}`;
     this.elementList.clickContainer.prepend(clickFeedback);
     setInterval(() => {
       clickFeedback.remove();
