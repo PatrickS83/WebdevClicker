@@ -1,3 +1,14 @@
+@keyframes fadeOutUp {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+    }
+  }
+
 .wrapper {
     height: 100vh;
     display: flex;
@@ -38,8 +49,15 @@
     flex-direction: column;
     align-items: center;
     font-size: 2rem;
+    position: relative;
 }
 
 .click_container img {
     cursor: pointer;
+}
+
+.click_container span {
+    position: absolute;
+    bottom: 100%;
+    animation: fadeOutUp 1.2s;
 }
