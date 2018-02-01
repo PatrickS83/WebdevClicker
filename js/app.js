@@ -15,7 +15,7 @@ class ClickerApp {
 
   checkUnlockBuyableItems() {
     if (this.score >= 10 && !this.sleepyCat) {
-      this.sleepyCat = new BuyableItem('Sleepy Cat', 1, 2);
+      this.sleepyCat = new BuyableItem('Sleepy Cat', 200, 1, 2);
     }
   }
 }
@@ -26,7 +26,8 @@ class UI {
       commitDisplay: document.querySelector('#commits'),
       gitCommitBtn: document.querySelector('#commit_button'),
       clickContainer: document.querySelector('.click_container'),
-      sleepyCatBtn: document.querySelector('#sleepyCatBtn')
+      sleepyCatBtn: document.querySelector('#sleepyCatBtn'),
+      sleepyCatInfo: document.querySelectorAll('.sleepycat_info')
     };
   }
 
@@ -41,6 +42,13 @@ class UI {
     setInterval(() => {
       clickFeedback.remove();
     }, 1000);
+  }
+
+  static displayItemInfos(name, price, cps, owned) {
+    const [displayedPrice, displayedCps, displayedOwned] = document.querySelectorAll(`[data-itemName="${name}"]`);
+    displayedPrice.innerHTML = price;
+    displayedCps.innerHTML = cps;
+    displayedOwned.innerHTML = owned;
   }
 }
 
@@ -67,22 +75,29 @@ class Controller {
 }
 
 class BuyableItem {
-  constructor(name, amount, cps) {
+  constructor(name, price, amount, cps) {
     this.name = name;
+    this.price = price;
     this.amount = amount;
     this.cps = cps;
+    this.init();
+  }
+
+  init() {
     this.calculateCommits();
+    UI.displayItemInfos(this.name, this.price, this.cps, this.amount);
   }
 
   calculateCommits() {
     setInterval(() => {
-      clickerApp.score += this.amount * this.cps;
+      clickerApp.score += this.amount * (this.cps / 2);
       ui.displayScore(clickerApp.score);
-    }, 300);
+    }, 500);
   }
 
   increaseAmount(amount) {
     this.amount += amount;
+    UI.displayItemInfos(this.name, this.price, this.cps, this.amount);
   }
 }
 
