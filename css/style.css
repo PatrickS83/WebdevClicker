@@ -27,6 +27,23 @@
     background-color: lemonchiffon;
     flex: 1;
 }
+
+.buy_interface .collapsible-header, .buy_interface .item_description_detail{
+    display: flex;
+    justify-content: space-between;
+}
+
+.buy_interface .item_description{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+
+.buy_interface img{
+    width: 80px;
+    height: 80px;
+}
+
 .game_interface{
     display: flex;
     flex-direction: column;

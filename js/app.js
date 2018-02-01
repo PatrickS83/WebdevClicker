@@ -23,14 +23,14 @@ class ClickerApp {
 class UI {
   constructor() {
     this.elementList = {
-      scoreDisplay: document.querySelector('#score'),
+      commitDisplay: document.querySelector('#commits'),
       gitCommitBtn: document.querySelector('#commit_button'),
       clickContainer: document.querySelector('.click_container')
     };
   }
 
   displayScore(score) {
-    this.elementList.scoreDisplay.innerText = score;
+    this.elementList.commitDisplay.innerText = score;
   }
 
   displayClickFeedback() {
