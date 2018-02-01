@@ -36,7 +36,10 @@
 .buy_interface .item_description{
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
+}
+
+.buy_interface i{
+    cursor: pointer;
 }
 
 .buy_interface img{

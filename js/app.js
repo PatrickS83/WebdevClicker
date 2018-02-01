@@ -10,13 +10,13 @@ class ClickerApp {
   increaseScoreFromClick() {
     this.score += this.baseIncrease * this.clickMuliplier;
     ui.displayScore(this.score);
+    this.checkUnlockBuyableItems();
   }
 
-  increaseScoreFromInterval() {
-    setInterval(() => {
-      this.score += 1 * this.muliplier;
-      ui.displayScore(this.score);
-    }, 300);
+  checkUnlockBuyableItems() {
+    if (this.score >= 10 && !this.sleepyCat) {
+      this.sleepyCat = new BuyableItem('Sleepy Cat', 1, 2);
+    }
   }
 }
 
@@ -25,7 +25,8 @@ class UI {
     this.elementList = {
       commitDisplay: document.querySelector('#commits'),
       gitCommitBtn: document.querySelector('#commit_button'),
-      clickContainer: document.querySelector('.click_container')
+      clickContainer: document.querySelector('.click_container'),
+      sleepyCatBtn: document.querySelector('#sleepyCatBtn')
     };
   }
 
@@ -50,14 +51,36 @@ class Controller {
 
   static setupEventListeners() {
     ui.elementList.gitCommitBtn.addEventListener('click', this.handleCommitClick);
+    ui.elementList.sleepyCatBtn.addEventListener('click', this.handleSleepyCatBuy);
   }
 
   static handleCommitClick() {
     clickerApp.increaseScoreFromClick();
     ui.displayClickFeedback();
   }
+
+  static handleSleepyCatBuy() {
+
+  }
+}
+
+class BuyableItem {
+  constructor(name, amount, cps) {
+    this.name = name;
+    this.amount = amount;
+    this.cps = cps;
+    this.calculateCommits();
+  }
+
+  calculateCommits() {
+    setInterval(() => {
+      clickerApp.score += this.amount * this.cps;
+      ui.displayScore(clickerApp.score);
+    }, 300);
+  }
 }
 
 const ui = new UI();
 const clickerApp = new ClickerApp();
 const controller = new Controller();
+
