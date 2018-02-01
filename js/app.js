@@ -60,7 +60,9 @@ class Controller {
   }
 
   static handleSleepyCatBuy() {
-
+    // placeholder for future multi-buy option
+    const amount = 1;
+    if (clickerApp.sleepyCat) clickerApp.sleepyCat.increaseAmount(amount);
   }
 }
 
@@ -77,6 +79,10 @@ class BuyableItem {
       clickerApp.score += this.amount * this.cps;
       ui.displayScore(clickerApp.score);
     }, 300);
+  }
+
+  increaseAmount(amount) {
+    this.amount += amount;
   }
 }
 
