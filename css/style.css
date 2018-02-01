@@ -1,0 +1,26 @@
+.wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buy_interface{
+    flex: 1;
+    border: solid 1px mediumorchid;
+}
+.game_interface{
+    flex: 2;
+    border: solid 1px mediumorchid;
+}
+.option_interface{
+    flex: 1;
+    border: solid 1px mediumorchid;
+}
