@@ -42,6 +42,10 @@
     cursor: pointer;
 }
 
+.buy_interface li{
+    position: relative;
+}
+
 /* div to lock helpers until player has enough commits */
 .buy_interface .locked{
     color: white;
