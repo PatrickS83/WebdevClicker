@@ -31,6 +31,7 @@ class ClickerApp {
   checkUnlockBuyableItems() {
     if (this.score >= 10 && !this.sleepyCat) {
       this.sleepyCat = new BuyableItem('Sleepy Cat', 50, 1, 2);
+      UI.unlockBuyableItem('Sleepy Cat');
     }
   }
 }
@@ -61,6 +62,12 @@ class UI {
     setInterval(() => {
       clickFeedback.remove();
     }, 1000);
+  }
+
+  // unlocks helper by removing blocking div
+  static unlockBuyableItem(name) {
+    const blockingDiv = document.querySelector(`[data-itemLocked="${name}"]`);
+    blockingDiv.remove();
   }
 
   // displays price, commits per second and number of buyable helpers
