@@ -129,6 +129,7 @@ class UI {
     displayedOwned.innerHTML = owned;
   }
 
+  // changes shopping cart to green checkmark when upgrade is bought
   static displayBoughtUpgrade(name) {
     const upgradeButton = document.querySelector(`#${name}`);
     upgradeButton.innerHTML = 'check';
@@ -166,6 +167,7 @@ class Controller {
     }
   }
 
+  // called when player buys an upgrade
   static handleUpgradeBuy(e) {
     const boughtUpgrade = e.target.id;
     clickerApp.addUpgrade(boughtUpgrade);
