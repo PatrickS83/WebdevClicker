@@ -45,6 +45,7 @@ class UI {
       gitCommitBtn: document.querySelector('#commit_button'),
       clickContainer: document.querySelector('.click_container'),
       sleepyCatBtn: document.querySelector('#sleepyCatBtn'),
+      buyButtons: document.querySelectorAll('.buyButton'),
       sleepyCatInfo: document.querySelectorAll('.sleepycat_info')
     };
   }
@@ -88,7 +89,7 @@ class Controller {
   // initializing event listeners
   static setupEventListeners() {
     ui.elementList.gitCommitBtn.addEventListener('click', this.handleCommitClick);
-    ui.elementList.sleepyCatBtn.addEventListener('click', this.handleSleepyCatBuy);
+    ui.elementList.buyButtons.forEach(button => button.addEventListener('click', this.handleHelperItemBuy));
   }
 
   // called when git-image is clicked
@@ -97,13 +98,14 @@ class Controller {
     ui.displayClickFeedback();
   }
 
-  // called when player buys a "sleepy cat" helper
-  static handleSleepyCatBuy() {
+  // called when player buys a new helper
+  static handleHelperItemBuy(e) {
+    const boughtHelper = e.target.id;
     // placeholder for future multi-buy option
     const amount = 1;
-    if (clickerApp.sleepyCat && clickerApp.sleepyCat.price <= clickerApp.score) {
-      clickerApp.subtractScore(clickerApp.sleepyCat.price);
-      clickerApp.sleepyCat.increaseAmount(amount);
+    if (clickerApp[boughtHelper] && clickerApp[boughtHelper].price <= clickerApp.score) {
+      clickerApp.subtractScore(clickerApp[boughtHelper].price);
+      clickerApp[boughtHelper].increaseAmount(amount);
     }
   }
 }
