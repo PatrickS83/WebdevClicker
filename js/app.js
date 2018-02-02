@@ -3,15 +3,30 @@ class ClickerApp {
     this.score = 0;
     // base increase of score
     this.baseIncrease = 1;
+    // base increase from upgrades
+    this.upgradeIncrease = 0;
     // score multiplier for clicking on commit button
     this.clickMuliplier = 1;
+    // collection of bought upgrades
+    this.upgrades = {
+      coffee: {
+        name: 'coffee', productivity: 1, multiply: 0, unlocked: false, bought: true
+      },
+      coffee2: {
+        name: 'coffee2', productivity: 41, multiply: 11, unlocked: false, bought: false
+      },
+      coffee3: {
+        name: 'coffee2', productivity: 2, multiply: 11, unlocked: false, bought: true
+      }
+    };
   }
 
   // called by clicking on commit-image. Increases commit score.
   increaseScoreFromClick() {
-    this.score += this.baseIncrease * this.clickMuliplier;
+    this.score += (this.baseIncrease + this.upgradeIncrease) * this.clickMuliplier;
     ui.displayScore(this.score);
     this.checkUnlockBuyableItems();
+    this.checkUnlockBuyableUpgrades();
   }
 
   // increases commit score from helpers
@@ -19,6 +34,7 @@ class ClickerApp {
     this.score += scoreToAdd;
     ui.displayScore(this.score);
     this.checkUnlockBuyableItems();
+    this.checkUnlockBuyableUpgrades();
   }
 
   // expects a number to subtract from commit score
@@ -43,6 +59,31 @@ class ClickerApp {
       UI.unlockBuyableItem('Skynet');
     }
   }
+
+  // checks and unlocks upgrades if player has enough commits
+  checkUnlockBuyableUpgrades() {
+    if (this.score >= 100 && !this.upgrades.coffee.unlocked) {
+      UI.unlockBuyableItem('Coffee');
+      this.upgrades.coffee.unlocked = true;
+    }
+  }
+
+  // adds bought upgrades to player object
+  addUpgrade(upgradeName) {
+    this.upgrades[upgradeName].bought = true;
+    this.calculateUpgradeIncrease();
+  }
+
+  calculateUpgradeIncrease() {
+    const upgrades = Object.values(this.upgrades);
+    let upgradeProductivity = 0;
+    upgrades.forEach((upgrade) => {
+      if (upgrade.bought) {
+        upgradeProductivity += upgrade.productivity;
+      }
+    });
+    this.upgradeIncrease = upgradeProductivity;
+  }
 }
 
 
@@ -53,7 +94,8 @@ class UI {
       commitDisplay: document.querySelector('#commits'),
       gitCommitBtn: document.querySelector('#commit_button'),
       clickContainer: document.querySelector('.click_container'),
-      buyButtons: document.querySelectorAll('.buyButton'),
+      buyItemButtons: document.querySelectorAll('.buyItemButton'),
+      buyUpgradeButtons: document.querySelectorAll('.buyUpgradeButton'),
       sleepyCatInfo: document.querySelectorAll('.sleepycat_info')
     };
   }
@@ -66,7 +108,7 @@ class UI {
   // shows visual feedback (the amount added to commit score) when player clicks git-image
   displayClickFeedback() {
     const clickFeedback = document.createElement('span');
-    clickFeedback.innerHTML = `git commit +${clickerApp.baseIncrease * clickerApp.clickMuliplier}`;
+    clickFeedback.innerHTML = `git commit +${(clickerApp.baseIncrease + clickerApp.upgradeIncrease) * clickerApp.clickMuliplier}`;
     this.elementList.clickContainer.prepend(clickFeedback);
     setInterval(() => {
       clickFeedback.remove();
@@ -86,6 +128,12 @@ class UI {
     displayedCps.innerHTML = cps;
     displayedOwned.innerHTML = owned;
   }
+
+  static displayBoughtUpgrade(name) {
+    const upgradeButton = document.querySelector(`#${name}`);
+    upgradeButton.innerHTML = 'check';
+    upgradeButton.style.color = 'green';
+  }
 }
 
 // Controller handles all event listener and button clicks
@@ -97,7 +145,8 @@ class Controller {
   // initializing event listeners
   static setupEventListeners() {
     ui.elementList.gitCommitBtn.addEventListener('click', this.handleCommitClick);
-    ui.elementList.buyButtons.forEach(button => button.addEventListener('click', this.handleHelperItemBuy));
+    ui.elementList.buyItemButtons.forEach(button => button.addEventListener('click', this.handleHelperItemBuy));
+    ui.elementList.buyUpgradeButtons.forEach(button => button.addEventListener('click', this.handleUpgradeBuy));
   }
 
   // called when git-image is clicked
@@ -115,6 +164,12 @@ class Controller {
       clickerApp.subtractScore(clickerApp[boughtHelper].price);
       clickerApp[boughtHelper].increaseAmount(amount);
     }
+  }
+
+  static handleUpgradeBuy(e) {
+    const boughtUpgrade = e.target.id;
+    clickerApp.addUpgrade(boughtUpgrade);
+    UI.displayBoughtUpgrade(boughtUpgrade);
   }
 }
 

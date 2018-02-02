@@ -27,6 +27,11 @@ ul {
     justify-content: space-between;
 }
 
+.buy_interface_tabs ul{
+    display: flex;
+    justify-content: space-around;
+}
+
 .buy_interface{
     background-color: lemonchiffon;
     flex: 1;
@@ -46,7 +51,7 @@ ul {
     cursor: pointer;
 }
 
-.buy_interface li{
+.collection li{
     position: relative;
 }
 

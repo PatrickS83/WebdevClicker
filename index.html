@@ -20,9 +20,16 @@
         </div>
     </nav>
 
+    <!-- Container on the left side of the screen. Used to display shop for helpers and upgrades -->
     <section class="game_container" >
         <div class="buy_interface">
-            <ul class="collection collapsible" data-collapsible="accordion">
+            <div class="buy_interface_tabs">
+                <ul class="tabs">
+                    <li class="tab"><a href="#buyHelpers">Buy Helpers</a></li>
+                    <li class="tab"><a href="#buyUpgrades">Buy Upgrades</a></li>
+                </ul>
+            </div>
+            <ul id="buyHelpers" class="collection collapsible" data-collapsible="accordion">
                 <li>
                     <div class="locked" data-itemLocked="Sleepy Cat">Unlocks at 10 commits</div>
                     <div class="collapsible-header valign-wrapper"><img src="img/catLaptopSleep.jpg" alt="" class="circle">
@@ -35,7 +42,7 @@
                             <br>
                             <div class="item_description_detail valign-wrapper">
                                     Price: <span data-itemName="Sleepy Cat">50</span> Cps:<span data-itemName="Sleepy Cat">1</span> Owned: <span data-itemName="Sleepy Cat">0</span>
-                                    <i id="sleepyCat" class="material-icons small buyButton">add_shopping_cart</i>
+                                    <i id="sleepyCat" class="material-icons small buyItemButton">add_shopping_cart</i>
                             </div>
                         </div>
                     </div>
@@ -52,7 +59,7 @@
                             <br>
                             <div class="item_description_detail valign-wrapper">
                                     Price: <span data-itemName="HTML Baby">150</span> Cps:<span data-itemName="HTML Baby">3</span> Owned: <span data-itemName="HTML Baby">0</span>
-                                    <i id="HTMLBaby" class="material-icons small buyButton">add_shopping_cart</i>
+                                    <i id="HTMLBaby" class="material-icons small buyItemButton">add_shopping_cart</i>
                             </div>
                         </div>
                     </div>
@@ -69,7 +76,7 @@
                             <br>
                             <div class="item_description_detail valign-wrapper">
                                     Price: <span data-itemName="Outsource Everything">300</span> Cps:<span data-itemName="Outsource Everything">6</span> Owned: <span data-itemName="Outsource Everything">0</span>
-                                    <i id="outsourceEveything" class="material-icons small buyButton">add_shopping_cart</i>
+                                    <i id="outsourceEveything" class="material-icons small buyItemButton">add_shopping_cart</i>
                             </div>
                         </div>
                     </div>
@@ -86,13 +93,36 @@
                             <br>
                             <div class="item_description_detail valign-wrapper">
                                     Price: <span data-itemName="Skynet">1000</span> Cps:<span data-itemName="Skynet">15</span> Owned: <span data-itemName="Skynet">0</span>
-                                    <i id="skynet" class="material-icons small buyButton">add_shopping_cart</i>
+                                    <i id="skynet" class="material-icons small buyItemButton">add_shopping_cart</i>
                             </div>
                         </div>
                     </div>
                 </li>
             </ul>
+            <div id="buyUpgrades" class="upgrade_container">
+                <ul class="collection collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="locked" data-itemLocked="Coffee">Unlocks at 100 commits</div>
+                        <div class="collapsible-header valign-wrapper"><img src="img/coffee.jpg" alt="" class="circle">
+                            <span class="title">Coffee</span>
+                            <i class="material-icons">info</i>
+                        </div>
+                        <div class="collapsible-body white valign-wrapper">
+                            <div class="item_description">
+                                <span>You discover Coffee. You are now addicted. Your productivity increases, but you now hate mornings.</span>
+                                <br>
+                                <div class="item_description_detail valign-wrapper">
+                                        Price: <span data-itemName="coffee">100</span> Productivity:<span data-itemName="coffee">1</span>
+                                        <i id="coffee" class="material-icons small buyUpgradeButton">add_shopping_cart</i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
+
+        <!-- Container in the middle of the screen. Main game interface. -->
         <div class="game_interface">
             <div class="score_container">
                 <span>Commits: </span><span id="commits">0</span>
@@ -101,8 +131,13 @@
                 <img id="commit_button" src="img/git.png">
             </div>
         </div>
-        <div class="option_interface"></div>
+
+        <!-- container on right side of screen. Used to display statistics and events -->
+        <div class="option_interface">
+
+        </div>
     </section>
+
 
     <footer class="page-footer">
         <div class="container">
