@@ -33,6 +33,11 @@ class ClickerApp {
       this.sleepyCat = new BuyableItem('Sleepy Cat', 50, 1, 2);
       UI.unlockBuyableItem('Sleepy Cat');
     }
+
+    if (this.score >= 100 && !this.HTMLBaby) {
+      this.HTMLBaby = new BuyableItem('HTML Baby', 150, 1, 3);
+      UI.unlockBuyableItem('HTML Baby');
+    }
   }
 }
 
@@ -52,7 +57,7 @@ class UI {
 
   // expects number and displays commit score in browser window
   displayScore(score) {
-    this.elementList.commitDisplay.innerText = score;
+    this.elementList.commitDisplay.innerText = score.toFixed(0);
   }
 
   // shows visual feedback (the amount added to commit score) when player clicks git-image
