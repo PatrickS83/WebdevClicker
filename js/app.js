@@ -19,30 +19,33 @@ class ClickerApp {
         name: 'coffee2', productivity: 2, multiply: 11, unlocked: false, bought: true
       }
     };
+    this.updateData();
+  }
+
+  // updates relevant data to current state
+  updateData() {
+    ui.displayScore(this.score);
+    this.checkUnlockBuyableItems();
+    this.checkUnlockBuyableUpgrades();
+    this.calculateStatistics();
   }
 
   // called by clicking on commit-image. Increases commit score.
   increaseScoreFromClick() {
     this.score += (this.baseIncrease + this.upgradeIncrease) * this.clickMuliplier;
-    ui.displayScore(this.score);
-    this.checkUnlockBuyableItems();
-    this.checkUnlockBuyableUpgrades();
-    this.calculateStatistics();
+    this.updateData();
   }
 
   // increases commit score from helpers
   increaseScoreFromHelpers(scoreToAdd) {
     this.score += scoreToAdd;
-    ui.displayScore(this.score);
-    this.checkUnlockBuyableItems();
-    this.checkUnlockBuyableUpgrades();
-    this.calculateStatistics();
+    this.updateData();
   }
 
   // expects a number to subtract from commit score
   subtractScore(scoreToSubtract) {
     this.score -= scoreToSubtract;
-    ui.displayScore(this.score);
+    this.updateData();
   }
 
   // checks and unlocks helpers if player has enough commits
