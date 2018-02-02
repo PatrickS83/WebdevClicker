@@ -38,6 +38,9 @@ class ClickerApp {
     } else if (this.score >= 250 && !this.outsourceEveything) {
       this.outsourceEveything = new BuyableItem('Outsource Everything', 300, 1, 6);
       UI.unlockBuyableItem('Outsource Everything');
+    } else if (this.score >= 750 && !this.skynet) {
+      this.skynet = new BuyableItem('Skynet', 1000, 1, 15);
+      UI.unlockBuyableItem('Skynet');
     }
   }
 }
