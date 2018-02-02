@@ -32,11 +32,12 @@ class ClickerApp {
     if (this.score >= 10 && !this.sleepyCat) {
       this.sleepyCat = new BuyableItem('Sleepy Cat', 50, 1, 2);
       UI.unlockBuyableItem('Sleepy Cat');
-    }
-
-    if (this.score >= 100 && !this.HTMLBaby) {
+    } else if (this.score >= 100 && !this.HTMLBaby) {
       this.HTMLBaby = new BuyableItem('HTML Baby', 150, 1, 3);
       UI.unlockBuyableItem('HTML Baby');
+    } else if (this.score >= 250 && !this.outsourceEveything) {
+      this.outsourceEveything = new BuyableItem('Outsource Everything', 300, 1, 6);
+      UI.unlockBuyableItem('Outsource Everything');
     }
   }
 }
@@ -49,7 +50,6 @@ class UI {
       commitDisplay: document.querySelector('#commits'),
       gitCommitBtn: document.querySelector('#commit_button'),
       clickContainer: document.querySelector('.click_container'),
-      sleepyCatBtn: document.querySelector('#sleepyCatBtn'),
       buyButtons: document.querySelectorAll('.buyButton'),
       sleepyCatInfo: document.querySelectorAll('.sleepycat_info')
     };
