@@ -27,6 +27,7 @@ class ClickerApp {
     ui.displayScore(this.score);
     this.checkUnlockBuyableItems();
     this.checkUnlockBuyableUpgrades();
+    this.calculateStatistics();
   }
 
   // increases commit score from helpers
@@ -35,6 +36,7 @@ class ClickerApp {
     ui.displayScore(this.score);
     this.checkUnlockBuyableItems();
     this.checkUnlockBuyableUpgrades();
+    this.calculateStatistics();
   }
 
   // expects a number to subtract from commit score
@@ -74,6 +76,7 @@ class ClickerApp {
     this.calculateUpgradeIncrease();
   }
 
+  // calculates the productivity increase from upgrades
   calculateUpgradeIncrease() {
     const upgrades = Object.values(this.upgrades);
     let upgradeProductivity = 0;
@@ -83,6 +86,19 @@ class ClickerApp {
       }
     });
     this.upgradeIncrease = upgradeProductivity;
+  }
+
+  // calculates basic statistics and passes it to display function as an object
+  calculateStatistics() {
+    const stats = {};
+    stats.baseIncrease = this.baseIncrease;
+    stats.upgradeIncrease = this.upgradeIncrease;
+    stats.helperCPS = 0;
+    if (this.sleepyCat) stats.helperCPS += this.sleepyCat.cps * this.sleepyCat.amount;
+    if (this.HTMLBaby) stats.helperCPS += this.HTMLBaby.cps * this.HTMLBaby.amount;
+    if (this.outsourceEveything) stats.helperCPS += this.outsourceEveything.cps * this.outsourceEveything.amount;
+    if (this.skynet) stats.helperCPS += this.skynet.cps * this.skynet.amount;
+    ui.displayStatistics(stats);
   }
 }
 
@@ -96,7 +112,8 @@ class UI {
       clickContainer: document.querySelector('.click_container'),
       buyItemButtons: document.querySelectorAll('.buyItemButton'),
       buyUpgradeButtons: document.querySelectorAll('.buyUpgradeButton'),
-      sleepyCatInfo: document.querySelectorAll('.sleepycat_info')
+      sleepyCatInfo: document.querySelectorAll('.sleepycat_info'),
+      statisticContainer: document.querySelector('.statistics_container'),
     };
   }
 
@@ -113,6 +130,14 @@ class UI {
     setInterval(() => {
       clickFeedback.remove();
     }, 1000);
+  }
+
+  // expects an object and displays the statistics inside
+  displayStatistics(stats) {
+    this.elementList.statisticContainer.innerHTML = `
+      <p>Your Productivity: ${stats.baseIncrease + stats.upgradeIncrease} (${stats.baseIncrease} Base + ${stats.upgradeIncrease} from Upgrade)</p>
+      <p>Commits per second from Helpers: ${stats.helperCPS}</p>
+    `;
   }
 
   // unlocks helper by removing blocking div
