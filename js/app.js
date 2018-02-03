@@ -10,14 +10,12 @@ class ClickerApp {
     // collection of bought upgrades
     this.upgrades = {
       coffee: {
-        name: 'coffee', productivity: 1, multiply: 0, unlocked: false, bought: true
+        name: 'coffee', price: 100, productivity: 1, multiply: 0, unlocked: false, bought: false
       },
-      coffee2: {
-        name: 'coffee2', productivity: 41, multiply: 11, unlocked: false, bought: false
+      multiMonitor: {
+        name: 'multiMonitor', price: 300, productivity: 3, multiply: 0, unlocked: false, bought: false
       },
-      coffee3: {
-        name: 'coffee2', productivity: 2, multiply: 11, unlocked: false, bought: true
-      }
+
     };
     // initilization on creation
     this.updateData();
@@ -68,9 +66,18 @@ class ClickerApp {
 
   // checks and unlocks upgrades if player has enough commits
   checkUnlockBuyableUpgrades() {
-    if (this.score >= 100 && !this.upgrades.coffee.unlocked) {
+    // temp variables to improve code readability
+    const [coffee, multiMonitor] = [
+      this.upgrades.coffee,
+      this.upgrades.multiMonitor
+    ];
+
+    if (this.score >= coffee.price && !coffee.unlocked) {
       UI.unlockBuyableItem('Coffee');
-      this.upgrades.coffee.unlocked = true;
+      coffee.unlocked = true;
+    } else if (this.score >= multiMonitor.price && !multiMonitor.unlocked) {
+      UI.unlockBuyableItem('multiMonitor');
+      multiMonitor.unlocked = true;
     }
   }
 
