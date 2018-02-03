@@ -275,9 +275,25 @@ class Events {
   constructor() {
     this.eventList = [
       {
-        id: 0, name: 'Testevent', duration: 5, multiply: 1, bonus: 0, active: false, description: 'This is a testevent'
+        id: 0, name: 'Testevent', duration: 5, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (1)',
+      },
+      {
+        id: 1, name: 'Testevent2', duration: 10, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (2)',
+      },
+      {
+        id: 2, name: 'Testevent3', duration: 15, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (3)',
       }
     ];
+    this.startEventRandomly();
+  }
+
+  // starts a random event from the eventlist every xxx seconds (specify time in setInterval)
+  startEventRandomly() {
+    setInterval(() => {
+      const maxNum = this.eventList.length;
+      const eventID = Math.floor(Math.random() * maxNum);
+      if (!this.eventList[eventID].active) this.startEvent(eventID);
+    }, 10000);
   }
 
   // starts a new event. Expects an index of eventList array.
