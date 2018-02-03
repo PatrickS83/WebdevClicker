@@ -22,8 +22,8 @@
 
     <!-- Container on the left side of the screen. Used to display shop for helpers and upgrades -->
     <section class="game_container" >
-        <div class="buy_interface">
-            <div class="buy_interface_tabs">
+        <div class="card buy_interface z-depth-3">
+            <div class="card buy_interface_tabs">
                 <ul class="tabs">
                     <li class="tab"><a href="#buyHelpers">Buy Helpers</a></li>
                     <li class="tab"><a href="#buyUpgrades">Buy Upgrades</a></li>
@@ -121,7 +121,7 @@
                     <li>
                         <div class="locked" data-itemLocked="multiMonitor">Unlocks at 300 commits</div>
                         <div class="collapsible-header valign-wrapper"><img src="img/multiMon.jpg" alt="" class="circle">
-                            <span class="title">Multi Munitor</span>
+                            <span class="title">Multi Monitor</span>
                             <i class="material-icons">info</i>
                         </div>
                         <div class="collapsible-body white valign-wrapper">
@@ -140,7 +140,7 @@
         </div>
 
         <!-- Container in the middle of the screen. Main game interface. -->
-        <div class="game_interface">
+        <div class="card game_interface teal lighten-3 z-depth-3">
             <div class="score_container">
                 <span>Commits: </span><span id="commits">0</span>
             </div>
@@ -150,8 +150,8 @@
         </div>
 
         <!-- container on right side of screen. Used to display statistics and events -->
-        <div class="option_interface">
-            <div class="option_interface_tabs">
+        <div class="card option_interface z-depth-3">
+            <div class="card option_interface_tabs">
                 <ul class="tabs">
                     <li class="tab"><a href="#statistics">Statistics</a></li>
                     <li class="tab"><a href="#events">Events</a></li>
@@ -160,7 +160,7 @@
             <div id="statistics" class="statistics_container">
 
             </div>
-            <div id="events" class="statistics_container">
+            <div id="events" class="events_container">
                 No active events!
             </div>
         </div>
@@ -169,7 +169,7 @@
 
     <footer class="page-footer">
         <div class="container">
-            © 2017
+            <span>© 2017</span>
             <a class="grey-text text-lighten-4 right" href="#!">Impressum</a>
         </div>
     </footer>
