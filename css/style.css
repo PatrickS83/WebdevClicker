@@ -63,6 +63,7 @@ ul {
 
 .buy_interface i{
     cursor: pointer;
+    user-select: none;
 }
 
 .collection li{
