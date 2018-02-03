@@ -133,6 +133,7 @@ class UI {
       buyUpgradeButtons: document.querySelectorAll('.buyUpgradeButton'),
       sleepyCatInfo: document.querySelectorAll('.sleepycat_info'),
       statisticContainer: document.querySelector('.statistics_container'),
+      eventList: document.querySelector('#eventsList'),
     };
   }
 
@@ -178,6 +179,21 @@ class UI {
     const upgradeButton = document.querySelector(`#${name}`);
     upgradeButton.innerHTML = 'check';
     upgradeButton.style.color = 'green';
+  }
+
+  // display events in event tab
+  displayEvents(currentEvent) {
+    const li = document.createElement('li');
+    li.classList.add('collection-item');
+    li.dataset.identity = currentEvent.id;
+    li.innerHTML = `${currentEvent.description}, duration: ${currentEvent.duration} seconds`;
+    this.elementList.eventList.appendChild(li);
+  }
+
+  // removes event from event tab. expects 'data-identity' of the event
+  static removeEvents(id) {
+    const eventToRemove = document.querySelector(`[data-identity="${id}"]`);
+    eventToRemove.remove();
   }
 }
 
@@ -255,7 +271,35 @@ class BuyableItem {
   }
 }
 
+class Events {
+  constructor() {
+    this.eventList = [
+      {
+        id: 0, name: 'Testevent', duration: 5, multiply: 1, bonus: 0, active: false, description: 'This is a testevent'
+      }
+    ];
+  }
+
+  // starts a new event. Expects an index of eventList array.
+  startEvent(index) {
+    const currentEvent = this.eventList[index];
+    const eventDuration = currentEvent.duration * 1000;
+    currentEvent.active = true;
+    ui.displayEvents(currentEvent);
+    this.stopEvent(currentEvent.id, eventDuration);
+  }
+
+  // stops event after specified amount of time
+  stopEvent(id, duration) {
+    setTimeout(() => {
+      UI.removeEvents(id);
+      this.eventList[id].active = false;
+    }, duration);
+  }
+}
+
 const ui = new UI();
 const clickerApp = new ClickerApp();
 const controller = new Controller();
+const events = new Events();
 
