@@ -134,6 +134,7 @@ class UI {
       sleepyCatInfo: document.querySelectorAll('.sleepycat_info'),
       statisticContainer: document.querySelector('.statistics_container'),
       eventList: document.querySelector('#eventsList'),
+      noActiveEvent: document.querySelector('#noEvents'),
     };
   }
 
@@ -183,6 +184,11 @@ class UI {
 
   // display events in event tab
   displayEvents(currentEvent) {
+    // make "No active Events" invisible when there are current active events
+    if (this.elementList.eventList.childElementCount === 1 && this.elementList.noActiveEvent.classList.contains('activated')) {
+      this.elementList.noActiveEvent.classList.toggle('activated');
+    }
+    // add event to event tab
     const li = document.createElement('li');
     li.classList.add('collection-item');
     li.dataset.identity = currentEvent.id;
@@ -191,9 +197,13 @@ class UI {
   }
 
   // removes event from event tab. expects 'data-identity' of the event
-  static removeEvents(id) {
+  removeEvents(id) {
     const eventToRemove = document.querySelector(`[data-identity="${id}"]`);
     eventToRemove.remove();
+    // make "No active Events" visible when there are no current events
+    if (this.elementList.eventList.childElementCount === 1 && !this.elementList.noActiveEvent.classList.contains('activated')) {
+      this.elementList.noActiveEvent.classList.toggle('activated');
+    }
   }
 }
 
@@ -275,13 +285,13 @@ class Events {
   constructor() {
     this.eventList = [
       {
-        id: 0, name: 'Testevent', duration: 5, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (1)',
+        id: 0, name: 'Testevent', duration: 2, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (1)',
       },
       {
-        id: 1, name: 'Testevent2', duration: 10, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (2)',
+        id: 1, name: 'Testevent2', duration: 4, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (2)',
       },
       {
-        id: 2, name: 'Testevent3', duration: 15, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (3)',
+        id: 2, name: 'Testevent3', duration: 6, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (3)',
       }
     ];
     this.startEventRandomly();
@@ -308,7 +318,7 @@ class Events {
   // stops event after specified amount of time
   stopEvent(id, duration) {
     setTimeout(() => {
-      UI.removeEvents(id);
+      ui.removeEvents(id);
       this.eventList[id].active = false;
     }, duration);
   }

@@ -132,3 +132,11 @@ ul {
 .option_interface_tabs, .buy_interface_tabs {
     margin-top: 0;
 }
+
+#noEvents{
+    display: none;
+}
+
+.activated {
+    display: block !important;
+}
