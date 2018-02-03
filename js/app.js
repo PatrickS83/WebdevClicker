@@ -19,6 +19,7 @@ class ClickerApp {
         name: 'coffee2', productivity: 2, multiply: 11, unlocked: false, bought: true
       }
     };
+    // initilization on creation
     this.updateData();
   }
 
@@ -97,6 +98,7 @@ class ClickerApp {
     stats.baseIncrease = this.baseIncrease;
     stats.upgradeIncrease = this.upgradeIncrease;
     stats.helperCPS = 0;
+    // checking if an instance of an helper exists and then add the cps to stats object
     if (this.sleepyCat) stats.helperCPS += this.sleepyCat.cps * this.sleepyCat.amount;
     if (this.HTMLBaby) stats.helperCPS += this.HTMLBaby.cps * this.HTMLBaby.amount;
     if (this.outsourceEveything) stats.helperCPS += this.outsourceEveything.cps * this.outsourceEveything.amount;

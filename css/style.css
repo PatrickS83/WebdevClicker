@@ -27,7 +27,7 @@ ul {
     justify-content: space-between;
 }
 
-.buy_interface_tabs ul{
+.buy_interface_tabs ul, .option_interface_tabs ul{
     display: flex;
     justify-content: space-around;
 }
