@@ -15,6 +15,9 @@ class ClickerApp {
       multiMonitor: {
         name: 'multiMonitor', price: 300, productivity: 3, multiply: 0, unlocked: false, bought: false
       },
+      headphones: {
+        name: 'headphones', price: 500, productivity: 3, multiply: 0, unlocked: false, bought: false
+      },
 
     };
     // initilization on creation
@@ -67,9 +70,10 @@ class ClickerApp {
   // checks and unlocks upgrades if player has enough commits
   checkUnlockBuyableUpgrades() {
     // temp variables to improve code readability
-    const [coffee, multiMonitor] = [
+    const [coffee, multiMonitor, headphones] = [
       this.upgrades.coffee,
-      this.upgrades.multiMonitor
+      this.upgrades.multiMonitor,
+      this.upgrades.headphones
     ];
 
     if (this.score >= coffee.price && !coffee.unlocked) {
@@ -78,6 +82,9 @@ class ClickerApp {
     } else if (this.score >= multiMonitor.price && !multiMonitor.unlocked) {
       UI.unlockBuyableItem('multiMonitor');
       multiMonitor.unlocked = true;
+    } else if (this.score >= headphones.price && !headphones.unlocked) {
+      UI.unlockBuyableItem('headphones');
+      headphones.unlocked = true;
     }
   }
 
