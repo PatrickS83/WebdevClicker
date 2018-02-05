@@ -119,6 +119,12 @@ class ClickerApp {
     if (this.skynet) stats.helperCPS += this.skynet.cps * this.skynet.amount;
     ui.displayStatistics(stats);
   }
+
+  // adds and removes bonuses from events
+  calculateEventBonuses(multiplier, bonus = 0) {
+    this.score += bonus;
+    this.clickMuliplier += multiplier;
+  }
 }
 
 
@@ -326,13 +332,16 @@ class Events {
     currentEvent.active = true;
     ui.displayEvents(currentEvent);
     this.stopEvent(currentEvent.id, eventDuration);
+    clickerApp.calculateEventBonuses(currentEvent.multiply, currentEvent.bonus);
   }
 
   // stops event after specified amount of time
   stopEvent(id, duration) {
     setTimeout(() => {
+      const currentEvent = this.eventList[id];
       ui.removeEvents(id);
-      this.eventList[id].active = false;
+      currentEvent.active = false;
+      clickerApp.calculateEventBonuses(-currentEvent.multiply, 0);
     }, duration);
   }
 }
