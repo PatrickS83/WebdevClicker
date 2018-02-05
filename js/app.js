@@ -192,8 +192,21 @@ class UI {
     const li = document.createElement('li');
     li.classList.add('collection-item');
     li.dataset.identity = currentEvent.id;
-    li.innerHTML = `${currentEvent.description}, duration: ${currentEvent.duration} seconds`;
+    li.innerHTML = `${currentEvent.description}, duration: <span>${currentEvent.duration}</span> seconds`;
     this.elementList.eventList.appendChild(li);
+    this.displayEventCountdown(li.dataset.identity, currentEvent.duration);
+  }
+
+  // displays event duration as a countdown
+  displayEventCountdown(id, duration) {
+    const currentEvent = document.querySelector(`[data-identity="${id}"] span`);
+    let eventDuration = duration - 1;
+    const eventInterval = setInterval(() => {
+      currentEvent.innerHTML = eventDuration;
+      eventDuration -= 1;
+    }, 1000)
+    // stops interval after event is finished
+    setTimeout(() => clearInterval(eventInterval), duration * 1000);
   }
 
   // removes event from event tab. expects 'data-identity' of the event
@@ -285,13 +298,13 @@ class Events {
   constructor() {
     this.eventList = [
       {
-        id: 0, name: 'Testevent', duration: 2, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (1)',
+        id: 0, name: 'Testevent', duration: 5, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (1)',
       },
       {
-        id: 1, name: 'Testevent2', duration: 4, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (2)',
+        id: 1, name: 'Testevent2', duration: 10, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (2)',
       },
       {
-        id: 2, name: 'Testevent3', duration: 6, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (3)',
+        id: 2, name: 'Testevent3', duration: 12, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (3)',
       }
     ];
     this.startEventRandomly();
