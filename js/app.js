@@ -1,5 +1,7 @@
 class ClickerApp {
   constructor() {
+    // amount of times player clicked commit
+    this.timesClicked = 0;
     this.score = 0;
     // base increase of score
     this.baseIncrease = 1;
@@ -34,6 +36,7 @@ class ClickerApp {
 
   // called by clicking on commit-image. Increases commit score.
   increaseScoreFromClick() {
+    this.timesClicked += 1;
     this.score += (this.baseIncrease + this.upgradeIncrease) * this.clickMuliplier;
     this.updateData();
   }
@@ -111,6 +114,8 @@ class ClickerApp {
     const stats = {};
     stats.baseIncrease = this.baseIncrease;
     stats.upgradeIncrease = this.upgradeIncrease;
+    stats.multiplier = this.clickMuliplier;
+    stats.timesClicked = this.timesClicked;
     stats.helperCPS = 0;
     // checking if an instance of an helper exists and then add the cps to stats object
     if (this.sleepyCat) stats.helperCPS += this.sleepyCat.cps * this.sleepyCat.amount;
@@ -163,7 +168,9 @@ class UI {
   // expects an object and displays the statistics inside
   displayStatistics(stats) {
     this.elementList.statisticContainer.innerHTML = `
-      <p>Your Productivity: ${stats.baseIncrease + stats.upgradeIncrease} (${stats.baseIncrease} Base + ${stats.upgradeIncrease} from Upgrade)</p>
+      <p>Amount of times clicked commit: ${stats.timesClicked}</p>
+      <p>Your Productivity: ${(stats.baseIncrease + stats.upgradeIncrease) * stats.multiplier} <br>
+      (${stats.baseIncrease} Base + ${stats.upgradeIncrease} from Upgrades * ${stats.multiplier} from multipliers)</p>
       <p>Commits per second from Helpers: ${stats.helperCPS}</p>
     `;
   }
