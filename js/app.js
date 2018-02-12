@@ -124,6 +124,7 @@ class ClickerApp {
   calculateEventBonuses(multiplier, bonus = 0) {
     this.score += bonus;
     this.clickMuliplier += multiplier;
+    this.updateData();
   }
 }
 
@@ -210,7 +211,7 @@ class UI {
     const eventInterval = setInterval(() => {
       currentEvent.innerHTML = eventDuration;
       eventDuration -= 1;
-    }, 1000)
+    }, 1000);
     // stops interval after event is finished
     setTimeout(() => clearInterval(eventInterval), duration * 1000);
   }
@@ -311,6 +312,9 @@ class Events {
       },
       {
         id: 2, name: 'Testevent3', duration: 12, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (3)',
+      },
+      {
+        id: 3, name: 'Testevent4 (one time bonus)', duration: 0, multiply: 0, bonus: 500, active: false, description: 'This is a testevent (4, bonus only)',
       }
     ];
     this.startEventRandomly();
