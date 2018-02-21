@@ -26,7 +26,7 @@ class Achievements {
       this.achievements.forEach((achievement) => {
         if (achievement.unlocked === false) {
           if (clickerApp.timesClicked >= achievement.required.clicks) {
-            Materialize.toast(`New Achievement: ${achievement.name}`, 4000);
+            Materialize.toast(`New Achievement: ${achievement.name}`, 4000, 'toast_achievement');
             achievement.unlocked = true;
           }
         }

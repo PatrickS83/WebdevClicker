@@ -154,3 +154,12 @@ ul {
     left: 0;
     margin: 0 auto;
   }
+
+  /* styling of achievement toast */
+.toast_achievement {
+    background-color: goldenrod;
+    text-align: center;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
