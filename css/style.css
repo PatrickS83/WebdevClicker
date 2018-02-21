@@ -134,6 +134,13 @@ ul {
     padding: 0 10px;
 }
 
+.statistics_container {
+    height: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .achievement_display  img{
     margin: 5px !important;
 }
