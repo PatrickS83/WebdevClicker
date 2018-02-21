@@ -95,6 +95,7 @@ class ClickerApp {
   // adds bought upgrades to player object
   addUpgrade(upgradeName) {
     this.upgrades[upgradeName].bought = true;
+    this.subtractScore(this.upgrades[upgradeName].price);
     this.calculateUpgradeIncrease();
   }
 
@@ -265,7 +266,7 @@ class UI {
     const allBtns = buyBtns.concat(buyUpgrBtns);
     allBtns.forEach((btn) => {
       const itemPrice = btn.parentElement.querySelector('span').innerText;
-      if (itemPrice > score) btn.classList.add('opaque');
+      if (itemPrice > score && btn.innerText !== 'check') btn.classList.add('opaque');
       else btn.classList.remove('opaque');
     });
   }
@@ -305,7 +306,7 @@ class Controller {
   static handleUpgradeBuy(e) {
     const boughtUpgrade = e.target.id;
     const itemPrice = e.target.parentElement.querySelector('span').innerText;
-    if (clickerApp.score > itemPrice) {
+    if (clickerApp.score > itemPrice && clickerApp.upgrades[boughtUpgrade].bought === false) {
       clickerApp.addUpgrade(boughtUpgrade);
       UI.displayBoughtUpgrade(boughtUpgrade);
     }
