@@ -3,6 +3,7 @@ class Achievements {
     this.achievements = [
       {
         name: 'Student',
+        descriptionReq: 'Make 5 commits',
         description: 'You made your first five commits. Hooray!',
         picture: '../img/achievements/achieveTest1.jpg',
         unlocked: false,
@@ -14,6 +15,7 @@ class Achievements {
       },
       {
         name: 'Intern',
+        descriptionReq: 'Make 100 commits',
         description: 'You made 100 commits. wow!',
         picture: '../img/achievements/achieveTest2.jpg',
         unlocked: false,
@@ -22,7 +24,7 @@ class Achievements {
           score: null,
           time: null
         }
-      }
+      },
     ];
     this.init();
   }
@@ -38,7 +40,8 @@ class Achievements {
       this.achievements.forEach((achievement) => {
         if (achievement.unlocked === false) {
           if (clickerApp.timesClicked >= achievement.required.clicks) {
-            Materialize.toast(`Achievement unlocked: ${achievement.name}`, 4000, 'toast_achievement');
+            Materialize.toast(`<img src="${achievement.picture}">
+              Achievement unlocked: ${achievement.name}`, 4000, 'toast_achievement');
             achievement.unlocked = true;
             ui.displayAchievements(this.achievements);
           }
