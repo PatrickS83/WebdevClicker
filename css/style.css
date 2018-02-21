@@ -134,6 +134,10 @@ ul {
     padding: 0 10px;
 }
 
+.achievement_display  img{
+    margin: 5px !important;
+}
+
 .option_interface_tabs, .buy_interface_tabs {
     margin-top: 0;
 }
