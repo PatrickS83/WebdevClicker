@@ -145,6 +145,8 @@ class UI {
       buyUpgradeButtons: document.querySelectorAll('.buyUpgradeButton'),
       sleepyCatInfo: document.querySelectorAll('.sleepycat_info'),
       statisticContainer: document.querySelector('.statistics_container'),
+      statisticDisplay: document.querySelector('.statistic_display'),
+      achievementDisplay: document.querySelector('.achievement_display'),
       eventList: document.querySelector('#eventsList'),
       noActiveEvent: document.querySelector('#noEvents'),
     };
@@ -167,7 +169,7 @@ class UI {
 
   // expects an object and displays the statistics inside
   displayStatistics(stats) {
-    this.elementList.statisticContainer.innerHTML = `
+    this.elementList.statisticDisplay.innerHTML = `
       <p>Amount of times clicked commit: ${stats.timesClicked}</p>
       <p>Your Productivity: ${(stats.baseIncrease + stats.upgradeIncrease) * stats.multiplier} <br>
       (${stats.baseIncrease} Base + ${stats.upgradeIncrease} from Upgrades * ${stats.multiplier} from multipliers)</p>
@@ -231,6 +233,14 @@ class UI {
     if (this.elementList.eventList.childElementCount === 1 && !this.elementList.noActiveEvent.classList.contains('activated')) {
       this.elementList.noActiveEvent.classList.toggle('activated');
     }
+  }
+
+  // displays achievements in statistics tab
+  displayAchievements(achievements) {
+    this.elementList.achievementDisplay.innerHTML = '';
+    achievements.forEach((achievement) => {
+      this.elementList.achievementDisplay.innerHTML += `<img src="${achievement.picture}">`;
+    });
   }
 }
 
