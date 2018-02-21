@@ -333,7 +333,3 @@ const clickerApp = new ClickerApp();
 const controller = new Controller();
 const events = new Events();
 const achievements = new Achievements();
-
-$(document).ready(() => {
-  $('.tooltipped').tooltip({ delay: 50 });
-});
