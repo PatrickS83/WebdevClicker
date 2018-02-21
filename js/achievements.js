@@ -4,7 +4,7 @@ class Achievements {
       {
         name: 'Student',
         description: 'You made your first five commits. Hooray!',
-        picture: 'testURL',
+        picture: '../img/achievements/achieveTest1.jpg',
         unlocked: false,
         required: {
           clicks: 5,
