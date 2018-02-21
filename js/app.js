@@ -312,4 +312,5 @@ const ui = new UI();
 const clickerApp = new ClickerApp();
 const controller = new Controller();
 const events = new Events();
+const achievements = new Achievements();
 
