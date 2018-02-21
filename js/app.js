@@ -237,7 +237,7 @@ class UI {
 
   // displays achievements in statistics tab
   displayAchievements(achievements) {
-    this.elementList.achievementDisplay.innerHTML = '<hr><h5>Achievements</h5>';
+    this.elementList.achievementDisplay.innerHTML = '<hr><h5 class="center-align">Achievements</h5>';
     achievements.forEach((achievement) => {
       const opaqueness = achievement.unlocked ? '' : 'opaque';
       const tooltip = achievement.unlocked ? achievement.description : achievement.descriptionReq;
