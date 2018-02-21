@@ -250,7 +250,7 @@ class UI {
       this.elementList.achievementDisplay.innerHTML += `
         <img
           src="${achievement.picture}"
-          class="tooltipped ${opaqueness}"
+          class="tooltipped ${opaqueness} hoverable"
           data-position="top" data-delay="30"
           data-tooltip="${achievement.name}: ${tooltip}"
         >`;
