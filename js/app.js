@@ -237,10 +237,20 @@ class UI {
 
   // displays achievements in statistics tab
   displayAchievements(achievements) {
-    this.elementList.achievementDisplay.innerHTML = '';
+    this.elementList.achievementDisplay.innerHTML = '<hr><h5>Achievements</h5>';
     achievements.forEach((achievement) => {
-      this.elementList.achievementDisplay.innerHTML += `<img src="${achievement.picture}">`;
+      const opaqueness = achievement.unlocked ? '' : 'opaque';
+      const tooltip = achievement.unlocked ? achievement.description : achievement.descriptionReq;
+      this.elementList.achievementDisplay.innerHTML += `
+        <img
+          src="${achievement.picture}"
+          class="tooltipped ${opaqueness}"
+          data-position="top" data-delay="30"
+          data-tooltip="${achievement.name}: ${tooltip}"
+        >`;
     });
+    // initialize materialize tooltips
+    $('.tooltipped').tooltip({ delay: 50 });
   }
 }
 
@@ -324,3 +334,6 @@ const controller = new Controller();
 const events = new Events();
 const achievements = new Achievements();
 
+$(document).ready(() => {
+  $('.tooltipped').tooltip({ delay: 50 });
+});
