@@ -304,8 +304,11 @@ class Controller {
   // called when player buys an upgrade
   static handleUpgradeBuy(e) {
     const boughtUpgrade = e.target.id;
-    clickerApp.addUpgrade(boughtUpgrade);
-    UI.displayBoughtUpgrade(boughtUpgrade);
+    const itemPrice = e.target.parentElement.querySelector('span').innerText;
+    if (clickerApp.score > itemPrice) {
+      clickerApp.addUpgrade(boughtUpgrade);
+      UI.displayBoughtUpgrade(boughtUpgrade);
+    }
   }
 }
 
