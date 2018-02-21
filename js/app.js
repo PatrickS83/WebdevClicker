@@ -29,6 +29,7 @@ class ClickerApp {
   // updates relevant data to current state
   updateData() {
     ui.displayScore(this.score);
+    ui.displayShoppingCart(this.score);
     this.checkUnlockBuyableItems();
     this.checkUnlockBuyableUpgrades();
     this.calculateStatistics();
@@ -204,7 +205,7 @@ class UI {
     if (this.elementList.eventList.childElementCount === 1 && this.elementList.noActiveEvent.classList.contains('activated')) {
       this.elementList.noActiveEvent.classList.toggle('activated');
     }
-    // add event to event tab
+    // create event listitem and add event to event tab
     const li = document.createElement('li');
     li.classList.add('collection-item', 'tooltipped');
     li.dataset.identity = currentEvent.id;
@@ -255,6 +256,18 @@ class UI {
     });
     // initialize materialize tooltips
     $('.tooltipped').tooltip({ delay: 50 });
+  }
+
+  // displays buy buttons as opaque, if not enough score to buy them
+  displayShoppingCart(score) {
+    const buyBtns = Array.from(this.elementList.buyItemButtons);
+    const buyUpgrBtns = Array.from(this.elementList.buyUpgradeButtons);
+    const allBtns = buyBtns.concat(buyUpgrBtns);
+    allBtns.forEach((btn) => {
+      const itemPrice = btn.parentElement.querySelector('span').innerText;
+      if (itemPrice > score) btn.classList.add('opaque');
+      else btn.classList.remove('opaque');
+    });
   }
 }
 
