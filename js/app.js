@@ -206,10 +206,14 @@ class UI {
     }
     // add event to event tab
     const li = document.createElement('li');
-    li.classList.add('collection-item');
+    li.classList.add('collection-item', 'tooltipped');
     li.dataset.identity = currentEvent.id;
-    li.innerHTML = `${currentEvent.description}, duration: <span>${currentEvent.duration}</span> seconds`;
+    li.dataset.position = 'top';
+    li.dataset.delay = '30';
+    li.dataset.tooltip = `${currentEvent.description}`;
+    li.innerHTML = `${currentEvent.name}, duration: <span>${currentEvent.duration}</span> seconds`;
     this.elementList.eventList.appendChild(li);
+    $('.tooltipped').tooltip({ delay: 50 });
     this.displayEventCountdown(li.dataset.identity, currentEvent.duration);
   }
 
