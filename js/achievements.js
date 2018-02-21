@@ -9,8 +9,8 @@ class Achievements {
         unlocked: false,
         required: {
           clicks: 5,
-          score: null,
-          time: null
+          score: 0,
+          time: 0
         }
       },
       {
@@ -21,8 +21,8 @@ class Achievements {
         unlocked: false,
         required: {
           clicks: 100,
-          score: null,
-          time: null
+          score: 0,
+          time: 0
         }
       },
     ];
