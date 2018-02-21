@@ -30,6 +30,7 @@ class Events {
   startEvent(index) {
     const currentEvent = this.eventList[index];
     const eventDuration = currentEvent.duration * 1000;
+    Materialize.toast(`New Event: ${currentEvent.description}`, 4000);
     currentEvent.active = true;
     ui.displayEvents(currentEvent);
     this.stopEvent(currentEvent.id, eventDuration);
