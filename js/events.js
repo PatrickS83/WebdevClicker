@@ -2,16 +2,40 @@ class Events {
   constructor() {
     this.eventList = [
       {
-        id: 0, name: 'Testevent', duration: 5, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (1)',
+        id: 0,
+        name: 'Someone brought you coffee!',
+        duration: 5,
+        multiply: 1,
+        bonus: 0,
+        active: false,
+        description: '5 seconds of extra productivity.'
       },
       {
-        id: 1, name: 'Testevent2', duration: 10, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (2)',
+        id: 1,
+        name: 'Your favorite song is playing!',
+        duration: 10,
+        multiply: 1,
+        bonus: 0,
+        active: false,
+        description: '10 seconds of extra productivity.'
       },
       {
-        id: 2, name: 'Testevent3', duration: 12, multiply: 1, bonus: 0, active: false, description: 'This is a testevent (3)',
+        id: 2,
+        name: 'Deadline for project is approaching!',
+        duration: 12,
+        multiply: 1,
+        bonus: 0,
+        active: false,
+        description: '12 seconds of extra productivity.'
       },
       {
-        id: 3, name: 'Testevent4 (one time bonus)', duration: 0, multiply: 0, bonus: 500, active: false, description: 'This is a testevent (4, bonus only)',
+        id: 3,
+        name: 'You found the exact solution on Stackoverflow!',
+        duration: 0,
+        multiply: 0,
+        bonus: 20,
+        active: false,
+        description: 'Instantly gain 20 commits.'
       }
     ];
     this.startEventRandomly();
@@ -23,14 +47,14 @@ class Events {
       const maxNum = this.eventList.length;
       const eventID = Math.floor(Math.random() * maxNum);
       if (!this.eventList[eventID].active) this.startEvent(eventID);
-    }, 10000);
+    }, 20000);
   }
 
   // starts a new event. Expects an index of eventList array.
   startEvent(index) {
     const currentEvent = this.eventList[index];
     const eventDuration = currentEvent.duration * 1000;
-    Materialize.toast(`New Event: ${currentEvent.description}`, 4000);
+    Materialize.toast(`New Event: ${currentEvent.name}`, 4000);
     currentEvent.active = true;
     ui.displayEvents(currentEvent);
     this.stopEvent(currentEvent.id, eventDuration);
